@@ -1,0 +1,12 @@
+/* #photo-template {
+    display: none;
+    
+  } */
+section {
+      display: hidden;
+ }
+
+div:first-child{
+    display: none;
+
+}
