@@ -16,20 +16,33 @@
     <select class="sel">
       <option value="default">Filter by Keyword</option>
     </select>
-    <!-- <div id="loc" ></div> -->
+    <br>
+    <div id="pages">
+      <button id="p1">Page1</button>
+      <button id="p2">Page2</button>
+    </div>
+    <br>
+    <div id="sort">
+      <input type="radio">sort number of horns</input>
+      <input type="radio">sort number of title</input>
+    </div>
+
   </header>
   <main>
-          <section >
-        <div id="photo-template">
-          <h2></h2>
-          <img src="" alt="">
-          <p></p>
-        </div>
+          <section id="sec1">
+            <script id="photo-template" type="x-tmpl-mustache">
+              <div class="{{keyword}}">
+                <h2>{{title}}</h2>
+                <img src="{{image_url}}" alt="">
+                <p>{{description}}</p>
+              </div>
+            </script>
       </section>
   </main>
   <footer>
     &copy; 2018 Code Fellows
   </footer>
+  <script src="https://unpkg.com/mustache@latest"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="js/app.js"></script>

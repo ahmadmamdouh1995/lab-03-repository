@@ -10,3 +10,23 @@ div:first-child{
     display: none;
 
 }
+#pages{
+  display: flex;
+  justify-content: space-around;
+  }
+
+  #pages button {
+    color: rgb(218, 218, 236);
+    font-size: large;
+    background-color: rgb(255, 6, 6);
+  }
+
+  #sort{
+    display: flex;
+  justify-content: center;
+  }
+
+  #sort input{
+    color: rgb(218, 218, 236);
+    font-size: large;
+  }
