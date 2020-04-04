@@ -2,6 +2,8 @@
 lab-03-repository
 the second chance 
 
+I get some help from my collega Saeed and Amal
+
 ## Feature 1: Pagination
 
 Estimate of time needed to complete: 2 hours
