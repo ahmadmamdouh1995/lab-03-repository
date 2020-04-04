@@ -1,5 +1,5 @@
 'use strict';
-let ArryKeys = [];
+// let ArryKeys = [];
 let allHorns = [];
 let page1 = [];
 let page2 = [];
@@ -15,52 +15,119 @@ $(document).ready(function () {
 
     Horns.prototype.render = function () {
         let $hornClone = $("#photo-template").html();
-        var rendered = Mustache.render($hornClone , this);
+        var rendered = Mustache.render($hornClone, this);
         $("main").append(rendered);
     };
-    
-    Horns.prototype.renderSelect =function() {
-        let selectMenu = $('.sel');
-        if(!(ArryKeys.includes(this.keyword))){
-            ArryKeys.push(this.keyword);
-            selectMenu.append(`<option> ${this.keyword} </option>`);
-        }
-   };
 
-       
-    const readJson = (num) => {
-        $.ajax(`data/page-${num}.json`, { method: "GET", dataType: "JSON" }).then(data => {
-            data.forEach(hornItem => {
-                let horn = new Horns(hornItem);
-                horn.renderSelect();
-                horn.render();
-            });
-       })
+    Horns.prototype.render2 = function () {
+        let $hornClone = $("#photo-template").html();
+        let rendered2 = Mustache.render($hornClone, this);
+        $("main").append(rendered2);
     };
-    readJson(1);
-    readJson(2);
+
+    Horns.prototype.renderSelect = function (arry) {
+        arry.forEach((val) => {
+            let selectMenu = $('.sel');
+            // if(!(ArryKeys.includes(this.keyword))){
+            //     ArryKeys.push(this.keyword);
+            selectMenu.append(`<option> ${val} </option>`);
+        });
+    };
 
 
-    $('#p1').on('click', function(){
-              
+    const readJson0 = () => {
+        $.ajax("data/page-1.json", { method: "GET", dataType: "JSON" }).then(data => {
+            data.forEach(hornItem0 => {
+                let horn = new Horns(hornItem0);
+                if (!(page1.includes(horn.keyword))) {
+                    page1.push(horn.keyword);
+                }
+                horn.render();
+                console.log(page1)
+
+                horn.renderSelect(page1);
+            });
+        });
+    };
+
+    const readJson1 = () => {
+        $.ajax("data/page-2.json", { method: "GET", dataType: "JSON" }).then(data => {
+            data.forEach(hornItem1 => {
+                let horn = new Horns(hornItem1);
+                if (!(page2.includes(horn.keyword))) {
+                    page2.push(horn.keyword);
+                }
+                horn.render2();
+                console.log(page2)
+                horn.renderSelect(page1);
+            });
+        });
+    };
+    readJson0();
+    // readJson1();
+
+
+    $('#pages').on('click', function (input) {
+        if (input.target.id === "p1") {
+            allHorns = [];
+            $('div').remove();
+            $('select option').remove();
+            readJson0();
+        } else
+            if (input.target.id === "p2") {
+                allHorns = [];
+                $('div').remove();
+                $('select option').remove();
+                readJson1();
+            }
+    });
+
+    $('input').click(() => {
+
     });
 
 
-    $('#p2').on('click', function(){
-       
+    // $('#p2').on('click', function(){
+    //     $('main').empty();
+    //     readJson(2); 
+    // });
+});
+
+$('.sel').change(function () {
+    let val = $(this).children('option:selected').val();
+    // ArryKeys.forEach(function(val){
+    // if(keys === val){
+    $('div').hide();
+    $(`.${val}`).show();
+});
+
+// helper function idea..from https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
+function sortBy(arry, value) {
+    return arry.sort(function (a, b) {
+        let x = a[value]; let y = b[value];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+}
+
+
+$('#sortByTitle').click(function () {
+    $('div').remove();
+    sortBy(allHorns, 'title');
+    allHorns.forEach((value) => {
+        value.render();
+        $('#sort').show();
     });
 });
 
-        $('.sel').change(function() {
-            let keys = $(this).children('option:selected').val();
-            ArryKeys.forEach(function(val){
-                if(keys === val){
-                    $('div').hide();
-                    $(`.${val}`).show();
-                    
-                }
-            });
-         });
+$('#sortByHorns').click(function () {
+    $('div').remove();
+    sortBy(allHorns, 'horns');
+    allHorns.forEach((value) => {
+        value.render();
+        $('#sort').show();
+    });
+});
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
