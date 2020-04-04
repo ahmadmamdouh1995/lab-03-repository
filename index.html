@@ -17,15 +17,15 @@
       <option value="default">Filter by Keyword</option>
     </select>
     <br>
-    <div id="pages">
+    <section id="pages">
       <button id="p1">Page1</button>
       <button id="p2">Page2</button>
-    </div>
+    </section>
     <br>
-    <div id="sort">
-      <input type="radio">sort number of horns</input>
-      <input type="radio">sort number of title</input>
-    </div>
+    <section id="sort">
+      <input type="radio" name="test" id="sortByHorns">Sort By Number Of Horns</input>
+      <input type="radio" name="test"  id="sortByTitle">Sort By Title</input>
+    </section>
 
   </header>
   <main>
@@ -34,6 +34,7 @@
               <div class="{{keyword}}">
                 <h2>{{title}}</h2>
                 <img src="{{image_url}}" alt="">
+                <p>Number Of Horns : {{horns}}</p>
                 <p>{{description}}</p>
               </div>
             </script>
